@@ -1,0 +1,103 @@
+**TCP
+1. In/Out
+Socket socket = new Socket("localhost", 2206);
+OutputStream os = socket.getOutputStream();
+InputStream is = socket.getInputStream();
+String str1 = "B21DCCN129;701";
+byte[] byte1 = str1.getBytes();
+os.write(byte1);
+os.flush();
+byte[] byte2 = new byte[1024];
+int byte20 = is.read(byte2);
+String str2 = new String(byte2, 0, byte2.length).trim();
+2.Data
+Socket socket = new Socket("localhost", 2206);
+DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+DataInputStream dis = new DataInputStream(socket.getInputStream());
+String s1 = "B21DCCN129;721";
+dos.writeUTF(s1);
+dos.flush();
+String s2 = dis.readUTF();
+3. Buffer
+Socket socket = new Socket("localhost", 2208);
+BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+String s1 = "B21DCCN129;915";
+bw.write(s1);
+bw.newLine();
+bw.flush();
+String s2 = br.readLine();
+4. Object
+Socket socket = new Socket("localhost", 1107);
+ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+String s1 = "B21DCCN129;918";
+oos.writeObject(s1);
+oos.flush();
+Custumer918 custumer918 = (Custumer918) ois.readObject();
+oos.writeObject(custumer918);
+oos.flush();
+
+String s1 = (String) ois.readObject();
+System.out.println("s1: " + s1);
+
+**UDP
+DatagramSocket datagramSocket = new DatagramSocket();
+InetAddress inetAddress = InetAddress.getByName("localhost");
+int port = 2207;
+String s1 = "B21DCCN129;801";
+byte[] byte1 = s1.getBytes();
+DatagramPacket dp1 = new DatagramPacket(byte1, byte1.length, inetAddress, port);
+datagramSocket.send(dp1);
+byte[] byte2 = new byte[1024];
+DatagramPacket dp2 = new DatagramPacket(byte2, byte2.length);
+datagramSocket.receive(dp2);
+String s2 = new String(dp2.getData(), 0, dp2.getLength()).trim();
+System.out.println(s2);
+
+byte[] byte2 = new byte[1024];
+DatagramPacket dp2 = new DatagramPacket(byte2, byte2.length);
+socket.receive(dp2);
+ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(dp2.getData());
+ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+Product937 product937 = (Product937) objectInputStream.readObject();
+
+ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+objectOutputStream.writeObject(product937);
+objectOutputStream.flush();
+byte[] byte3 = byteArrayOutputStream.toByteArray();
+DatagramPacket dp3 = new DatagramPacket(byte3, byte3.length, inetAddress, port);
+socket.send(dp3);
+
+if (Character.isUpperCase(c)) {
+    char encryptedChar = (char) ((c + s - 'A') % 26 + 'A');
+    result.append(encryptedChar);
+} else if (Character.isLowerCase(c)) {
+    char encryptedChar = (char) ((c + s - 'a') % 26 + 'a');
+    result.append(encryptedChar);
+} else {
+    result.append(c);
+}
+
+byte[] bytes2 = new byte[1024];
+DatagramPacket datagramPacket2 = new DatagramPacket(bytes2, bytes2.length);
+socket.receive(datagramPacket2);
+byte[] requestIdBytes = new byte[8];  // 8 ký tự đầu
+byte[] productBytes = new byte[datagramPacket2.getLength() - 8];
+System.arraycopy(bytes2, 0, requestIdBytes, 0, 8);
+System.arraycopy(bytes2, 8, productBytes, 0, datagramPacket2.getLength() - 8);
+
+ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+objectOutputStream.writeObject(product);
+objectOutputStream.flush();
+byte[] bytes3 = byteArrayOutputStream.toByteArray();
+ByteBuffer byteBuffer = ByteBuffer.allocate(bytes3.length + requestIdBytes.length);
+byteBuffer.put(requestIdBytes);
+byteBuffer.put(bytes3);
+byte[] sendByte = byteBuffer.array();
+DatagramPacket datagramPacket3 = new DatagramPacket(sendByte, sendByte.length, inetAddress, 2209);
+socket.send(datagramPacket3);
+
+GCD (a, b) if (b == 0 ) ? a : GCD (b, a % b)
